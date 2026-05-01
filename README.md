@@ -1,13 +1,9 @@
 # ReClip
 
-A self-hosted, open-source video and audio downloader with a clean web UI. Paste links from YouTube, TikTok, Instagram, Twitter/X, and 1000+ other sites — download as MP4 or MP3.
+ReClip by Avery Gan is a self-hosted, open-source video and audio downloader with a clean web UI. Paste links from YouTube, TikTok, Instagram, Twitter/X, and 1000+ other sites — download as MP4 or MP3. Changing the base image to Alpine Linux reduces the size considerably and some simple additions/modifications make it even better.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-
-https://github.com/user-attachments/assets/419d3e50-c933-444b-8cab-a9724986ba05
-
-![ReClip MP3 Mode](assets/preview-mp3.png)
 
 ## Features
 
@@ -30,11 +26,22 @@ cd reclip
 
 Open **http://localhost:8899**.
 
-Or with Docker:
+or with Docker Compose:
+```bash
+docker compose up
+```
+
+Or with Docker Build:
 
 ```bash
-docker build -t reclip . && docker run -p 8899:8899 reclip
+docker build -t reclip-alpine . && docker run --rm -p 8899:8899 --name reclip reclip-alpine
 ```
+
+or with Docker and GitHub Container Registry:
+```bash
+docker run --rm -p 8899:8899 --name reclip ghcr.io/msk-nightly/reclip-alpine:latest
+```
+
 
 ## Usage
 

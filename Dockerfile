@@ -1,14 +1,30 @@
-FROM python:3.12-slim
+FROM alpine:3.23.4
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
-    rm -rf /var/lib/apt/lists/*
+# RUN echo 'nameserver 9.9.9.9' > /etc/resolv.conf
+# apk add git
+# git clone https://github.com/averygan/reclip app && rm -rf /app/assets
+
+RUN apk --no-cache --update-cache upgrade && \
+    apk --no-cache add python3 py3-pip ffmpeg
 
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+RUN mkdir -p cookies && \
+    mkdir -p downloads && \
+    addgroup reclip && \
+    adduser -G reclip -D reclip && \
+    chown -R reclip:reclip /app
+
+USER reclip
+
+ENV VIRTUAL_ENV=/app/venv
+RUN python3 -m venv $VIRTUAL_ENV && \
+    . /app/venv/bin/activate && \
+    pip install --upgrade --no-cache-dir pip && \
+    pip install --no-cache-dir -U --pre -r /app/requirements.txt
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 EXPOSE 8899
 ENV HOST=0.0.0.0

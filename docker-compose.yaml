@@ -1,0 +1,19 @@
+name: reclip
+
+services:
+  reclip:
+    container_name: reclip
+    build: .
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    user: "1000:1000"
+    environment:
+      - PORT=8899
+      - HOST=0.0.0.0
+    ports: [ 8899:8899 ]
+    volumes:
+      - ./cookies:/app/cookies
+    command: python app.py
+    restart: unless-stopped
