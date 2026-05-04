@@ -1,6 +1,6 @@
 # ReClip
 
-ReClip by Avery Gan is a self-hosted, open-source video and audio downloader with a clean web UI. Paste links from YouTube, TikTok, Instagram, Twitter/X, and 1000+ other sites — download as MP4 or MP3. Changing the base image to Alpine Linux reduces the size considerably and some simple additions/modifications make it even better.
+ReClip by Avery Gan is a self-hosted, open-source video and audio downloader with a clean web UI. Paste links from YouTube, TikTok, Instagram, Twitter/X, and 1000+ other sites — download as MP4 or MP3. Run it in a disposable Alpine Linux Container, which is low footprint, quick and inexpensive, or directly as a Python app (given you have flask and yt-dlp installed). Some simple additions/modifications chosen from the PRs in upstream repository have been used to improve user experience.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -18,10 +18,10 @@ ReClip by Avery Gan is a self-hosted, open-source video and audio downloader wit
 ## Quick Start
 
 ```bash
-brew install yt-dlp ffmpeg    # or apt install ffmpeg && pip install yt-dlp
+brew install yt-dlp ffmpeg    # or apt install pipx python3-flask ffmpeg && pipx install yt-dlp
 git clone https://github.com/averygan/reclip.git
 cd reclip
-./reclip.sh
+./reclip.sh    # or python3 app.py
 ```
 
 Open **http://localhost:8899**.
