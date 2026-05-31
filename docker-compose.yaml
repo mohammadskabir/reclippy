@@ -11,9 +11,9 @@ services:
     user: "1000:1000"
     environment:
       - PORT=8899
-      - HOST=0.0.0.0
+      # - HOST=0.0.0.0
     ports: [ 8899:8899 ]
     volumes:
       - ./cookies:/app/cookies
-    command: python app.py
+    command: gunicorn -b 0.0.0.0:8899 -w 1 --threads 4 --timeout 600 --access-logfile - app:app
     restart: unless-stopped

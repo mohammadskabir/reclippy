@@ -3,9 +3,14 @@ FROM alpine:3.23.4
 # RUN echo 'nameserver 9.9.9.9' > /etc/resolv.conf
 # apk add git
 # git clone https://github.com/averygan/reclip app && rm -rf /app/assets
+# ENV HOST=0.0.0.0
+# CMD ["python", "app.py"]
 
 RUN apk --no-cache --update-cache upgrade && \
     apk --no-cache add python3 py3-pip ffmpeg
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
@@ -27,5 +32,4 @@ RUN python3 -m venv $VIRTUAL_ENV && \
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 EXPOSE 8899
-ENV HOST=0.0.0.0
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:8899", "-w", "1", "--threads", "4", "--timeout", "600", "--access-logfile", "-", "app:app"]
