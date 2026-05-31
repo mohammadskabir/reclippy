@@ -1,9 +1,11 @@
-venv/
 cookies/*
 downloads/*
+venv/
 __pycache__/
 *.pyc
+*.pyo
 assets/*.mov
+desktop.ini
 .DS_Store
 .env
 .env.local
