@@ -1,5 +1,3 @@
-.git
-.gitignore
 assets
 cookies
 downloads
@@ -16,5 +14,7 @@ desktop.ini
 .DS_Store
 .env
 .env.*
+.git
+.gitignore
 .vscode
 .idea

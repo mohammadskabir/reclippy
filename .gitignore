@@ -8,6 +8,4 @@ assets/*.mov
 desktop.ini
 .DS_Store
 .env
-.env.local
-.env.production
-.env.development
+.env.*
