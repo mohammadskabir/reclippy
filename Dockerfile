@@ -1,4 +1,4 @@
-FROM alpine:3.23.4
+FROM alpine:latest
 
 # RUN echo 'nameserver 9.9.9.9' > /etc/resolv.conf
 # apk add git
@@ -7,7 +7,7 @@ FROM alpine:3.23.4
 # CMD ["python", "app.py"]
 
 RUN apk --no-cache --update-cache upgrade && \
-    apk --no-cache add python3 py3-pip ffmpeg
+    apk --no-cache add python3 py3-pip ffmpeg deno
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
@@ -28,7 +28,8 @@ ENV VIRTUAL_ENV=/app/venv
 RUN python3 -m venv $VIRTUAL_ENV && \
     . /app/venv/bin/activate && \
     pip install --upgrade --no-cache-dir pip && \
-    pip install --no-cache-dir -U --pre -r /app/requirements.txt
+    pip install --no-cache-dir -U --pre -r /app/requirements.txt && \
+    cp /app/templates/yt-dlp.conf /app/venv/bin/
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 EXPOSE 8899
