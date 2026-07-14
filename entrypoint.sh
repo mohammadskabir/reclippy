@@ -3,7 +3,6 @@
 # its extractors frequently, and the usual fix is simply updating yt-dlp.
 # Installs into the reclip user's ~/.local (first on PATH). Skip with RECLIP_NO_UPDATE=1.
 # Edit: Also, use the designated nameserver.
-echo 'nameserver 9.9.9.9' > /etc/resolv.conf
 
 if [ -z "$RECLIP_NO_UPDATE" ]; then
     echo "Updating yt-dlp..."
