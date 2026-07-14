@@ -2,6 +2,7 @@ name: reclippy
 
 services:
   reclip:
+    image: reclippy
     container_name: reclippy
     build: .
     cap_drop:
