@@ -3,7 +3,9 @@ FROM alpine:latest
 # apk add git
 
 RUN apk --no-cache --update-cache upgrade && \
-    apk --no-cache add python3 py3-pip ffmpeg deno
+    apk --no-cache add python3 py3-pip && \
+    apk --no-cache add ffmpeg && \
+    apk --no-cache add deno
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
